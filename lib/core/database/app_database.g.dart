@@ -5126,24 +5126,26 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   ]);
 }
 
-typedef $$CategoriesTableCreateCompanionBuilder = CategoriesCompanion Function({
-  required String id,
-  required String name,
-  required String description,
-  required int totalQuestions,
-  required int sortOrder,
-  required int weight,
-  Value<int> rowid,
-});
-typedef $$CategoriesTableUpdateCompanionBuilder = CategoriesCompanion Function({
-  Value<String> id,
-  Value<String> name,
-  Value<String> description,
-  Value<int> totalQuestions,
-  Value<int> sortOrder,
-  Value<int> weight,
-  Value<int> rowid,
-});
+typedef $$CategoriesTableCreateCompanionBuilder =
+    CategoriesCompanion Function({
+      required String id,
+      required String name,
+      required String description,
+      required int totalQuestions,
+      required int sortOrder,
+      required int weight,
+      Value<int> rowid,
+    });
+typedef $$CategoriesTableUpdateCompanionBuilder =
+    CategoriesCompanion Function({
+      Value<String> id,
+      Value<String> name,
+      Value<String> description,
+      Value<int> totalQuestions,
+      Value<int> sortOrder,
+      Value<int> weight,
+      Value<int> rowid,
+    });
 
 final class $$CategoriesTableReferences
     extends BaseReferences<_$AppDatabase, $CategoriesTable, Category> {
@@ -5606,7 +5608,7 @@ class $$CategoriesTableTableManager
           withReferenceMapper: (p0) => p0
               .map(
                 (e) => (
-                  e.readTable<$CategoriesTable, Category>(table),
+                  e.readTable(table),
                   $$CategoriesTableReferences(db, table, e),
                 ),
               )
@@ -5630,11 +5632,10 @@ class $$CategoriesTableTableManager
                   getPrefetchedDataCallback: (items) async {
                     return [
                       if (questionsRefs)
-                        await $_getPrefetchedDataByColumns<
+                        await $_getPrefetchedData<
                           Category,
                           $CategoriesTable,
-                          QuestionRow,
-                          $QuestionsTable
+                          QuestionRow
                         >(
                           currentTable: table,
                           referencedTable: $$CategoriesTableReferences
@@ -5645,16 +5646,17 @@ class $$CategoriesTableTableManager
                                 table,
                                 p0,
                               ).questionsRefs,
-                          currentColumn: 'id',
-                          referencedColumn: 'category_id',
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.categoryId == item.id,
+                              ),
                           typedResults: items,
                         ),
                       if (learningRoundsRefs)
-                        await $_getPrefetchedDataByColumns<
+                        await $_getPrefetchedData<
                           Category,
                           $CategoriesTable,
-                          LearningRound,
-                          $LearningRoundsTable
+                          LearningRound
                         >(
                           currentTable: table,
                           referencedTable: $$CategoriesTableReferences
@@ -5665,16 +5667,17 @@ class $$CategoriesTableTableManager
                                 table,
                                 p0,
                               ).learningRoundsRefs,
-                          currentColumn: 'id',
-                          referencedColumn: 'category_id',
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.categoryId == item.id,
+                              ),
                           typedResults: items,
                         ),
                       if (categoryProgressRefs)
-                        await $_getPrefetchedDataByColumns<
+                        await $_getPrefetchedData<
                           Category,
                           $CategoriesTable,
-                          CategoryProgressData,
-                          $CategoryProgressTable
+                          CategoryProgressData
                         >(
                           currentTable: table,
                           referencedTable: $$CategoriesTableReferences
@@ -5685,16 +5688,17 @@ class $$CategoriesTableTableManager
                                 table,
                                 p0,
                               ).categoryProgressRefs,
-                          currentColumn: 'id',
-                          referencedColumn: 'category_id',
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.categoryId == item.id,
+                              ),
                           typedResults: items,
                         ),
                       if (weakConceptsRefs)
-                        await $_getPrefetchedDataByColumns<
+                        await $_getPrefetchedData<
                           Category,
                           $CategoriesTable,
-                          WeakConcept,
-                          $WeakConceptsTable
+                          WeakConcept
                         >(
                           currentTable: table,
                           referencedTable: $$CategoriesTableReferences
@@ -5705,8 +5709,10 @@ class $$CategoriesTableTableManager
                                 table,
                                 p0,
                               ).weakConceptsRefs,
-                          currentColumn: 'id',
-                          referencedColumn: 'category_id',
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.categoryId == item.id,
+                              ),
                           typedResults: items,
                         ),
                     ];
@@ -5736,46 +5742,48 @@ typedef $$CategoriesTableProcessedTableManager =
         bool weakConceptsRefs,
       })
     >;
-typedef $$QuestionsTableCreateCompanionBuilder = QuestionsCompanion Function({
-  required String id,
-  required String categoryId,
-  required String subcategory,
-  required String questionType,
-  required String questionStyle,
-  required int difficulty,
-  required String component,
-  required String questionText,
-  required String optionsJson,
-  required String correctAnswersJson,
-  required String explanation,
-  required String incorrectOptionExplanationsJson,
-  required String scenario,
-  required String examTip,
-  required String technicalConcept,
-  required String documentationReference,
-  required String versionApplicability,
-  Value<int> rowid,
-});
-typedef $$QuestionsTableUpdateCompanionBuilder = QuestionsCompanion Function({
-  Value<String> id,
-  Value<String> categoryId,
-  Value<String> subcategory,
-  Value<String> questionType,
-  Value<String> questionStyle,
-  Value<int> difficulty,
-  Value<String> component,
-  Value<String> questionText,
-  Value<String> optionsJson,
-  Value<String> correctAnswersJson,
-  Value<String> explanation,
-  Value<String> incorrectOptionExplanationsJson,
-  Value<String> scenario,
-  Value<String> examTip,
-  Value<String> technicalConcept,
-  Value<String> documentationReference,
-  Value<String> versionApplicability,
-  Value<int> rowid,
-});
+typedef $$QuestionsTableCreateCompanionBuilder =
+    QuestionsCompanion Function({
+      required String id,
+      required String categoryId,
+      required String subcategory,
+      required String questionType,
+      required String questionStyle,
+      required int difficulty,
+      required String component,
+      required String questionText,
+      required String optionsJson,
+      required String correctAnswersJson,
+      required String explanation,
+      required String incorrectOptionExplanationsJson,
+      required String scenario,
+      required String examTip,
+      required String technicalConcept,
+      required String documentationReference,
+      required String versionApplicability,
+      Value<int> rowid,
+    });
+typedef $$QuestionsTableUpdateCompanionBuilder =
+    QuestionsCompanion Function({
+      Value<String> id,
+      Value<String> categoryId,
+      Value<String> subcategory,
+      Value<String> questionType,
+      Value<String> questionStyle,
+      Value<int> difficulty,
+      Value<String> component,
+      Value<String> questionText,
+      Value<String> optionsJson,
+      Value<String> correctAnswersJson,
+      Value<String> explanation,
+      Value<String> incorrectOptionExplanationsJson,
+      Value<String> scenario,
+      Value<String> examTip,
+      Value<String> technicalConcept,
+      Value<String> documentationReference,
+      Value<String> versionApplicability,
+      Value<int> rowid,
+    });
 
 final class $$QuestionsTableReferences
     extends BaseReferences<_$AppDatabase, $QuestionsTable, QuestionRow> {
@@ -6385,7 +6393,7 @@ class $$QuestionsTableTableManager
           withReferenceMapper: (p0) => p0
               .map(
                 (e) => (
-                  e.readTable<$QuestionsTable, QuestionRow>(table),
+                  e.readTable(table),
                   $$QuestionsTableReferences(db, table, e),
                 ),
               )
@@ -6419,15 +6427,17 @@ class $$QuestionsTableTableManager
                         >
                       >(state) {
                         if (categoryId) {
-                          state = state.withJoin(
-                            currentTable: table,
-                            currentColumn: table.categoryId,
-                            referencedTable: $$QuestionsTableReferences
-                                ._categoryIdTable(db),
-                            referencedColumn: $$QuestionsTableReferences
-                                ._categoryIdTable(db)
-                                .id,
-                          ) as T;
+                          state =
+                              state.withJoin(
+                                    currentTable: table,
+                                    currentColumn: table.categoryId,
+                                    referencedTable: $$QuestionsTableReferences
+                                        ._categoryIdTable(db),
+                                    referencedColumn: $$QuestionsTableReferences
+                                        ._categoryIdTable(db)
+                                        .id,
+                                  )
+                                  as T;
                         }
 
                         return state;
@@ -6435,11 +6445,10 @@ class $$QuestionsTableTableManager
                   getPrefetchedDataCallback: (items) async {
                     return [
                       if (userAnswersRefs)
-                        await $_getPrefetchedDataByColumns<
+                        await $_getPrefetchedData<
                           QuestionRow,
                           $QuestionsTable,
-                          UserAnswer,
-                          $UserAnswersTable
+                          UserAnswer
                         >(
                           currentTable: table,
                           referencedTable: $$QuestionsTableReferences
@@ -6450,16 +6459,17 @@ class $$QuestionsTableTableManager
                                 table,
                                 p0,
                               ).userAnswersRefs,
-                          currentColumn: 'id',
-                          referencedColumn: 'question_id',
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.questionId == item.id,
+                              ),
                           typedResults: items,
                         ),
                       if (bookmarksRefs)
-                        await $_getPrefetchedDataByColumns<
+                        await $_getPrefetchedData<
                           QuestionRow,
                           $QuestionsTable,
-                          Bookmark,
-                          $BookmarksTable
+                          Bookmark
                         >(
                           currentTable: table,
                           referencedTable: $$QuestionsTableReferences
@@ -6470,8 +6480,10 @@ class $$QuestionsTableTableManager
                                 table,
                                 p0,
                               ).bookmarksRefs,
-                          currentColumn: 'id',
-                          referencedColumn: 'question_id',
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.questionId == item.id,
+                              ),
                           typedResults: items,
                         ),
                     ];
@@ -6791,7 +6803,7 @@ class $$UserAnswersTableTableManager
           withReferenceMapper: (p0) => p0
               .map(
                 (e) => (
-                  e.readTable<$UserAnswersTable, UserAnswer>(table),
+                  e.readTable(table),
                   $$UserAnswersTableReferences(db, table, e),
                 ),
               )
@@ -6817,15 +6829,17 @@ class $$UserAnswersTableTableManager
                     >
                   >(state) {
                     if (questionId) {
-                      state = state.withJoin(
-                        currentTable: table,
-                        currentColumn: table.questionId,
-                        referencedTable: $$UserAnswersTableReferences
-                            ._questionIdTable(db),
-                        referencedColumn: $$UserAnswersTableReferences
-                            ._questionIdTable(db)
-                            .id,
-                      ) as T;
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.questionId,
+                                referencedTable: $$UserAnswersTableReferences
+                                    ._questionIdTable(db),
+                                referencedColumn: $$UserAnswersTableReferences
+                                    ._questionIdTable(db)
+                                    .id,
+                              )
+                              as T;
                     }
 
                     return state;
@@ -7251,7 +7265,7 @@ class $$LearningRoundsTableTableManager
           withReferenceMapper: (p0) => p0
               .map(
                 (e) => (
-                  e.readTable<$LearningRoundsTable, LearningRound>(table),
+                  e.readTable(table),
                   $$LearningRoundsTableReferences(db, table, e),
                 ),
               )
@@ -7277,15 +7291,18 @@ class $$LearningRoundsTableTableManager
                     >
                   >(state) {
                     if (categoryId) {
-                      state = state.withJoin(
-                        currentTable: table,
-                        currentColumn: table.categoryId,
-                        referencedTable: $$LearningRoundsTableReferences
-                            ._categoryIdTable(db),
-                        referencedColumn: $$LearningRoundsTableReferences
-                            ._categoryIdTable(db)
-                            .id,
-                      ) as T;
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.categoryId,
+                                referencedTable: $$LearningRoundsTableReferences
+                                    ._categoryIdTable(db),
+                                referencedColumn:
+                                    $$LearningRoundsTableReferences
+                                        ._categoryIdTable(db)
+                                        .id,
+                              )
+                              as T;
                     }
 
                     return state;
@@ -7640,9 +7657,7 @@ class $$CategoryProgressTableTableManager
           withReferenceMapper: (p0) => p0
               .map(
                 (e) => (
-                  e.readTable<$CategoryProgressTable, CategoryProgressData>(
-                    table,
-                  ),
+                  e.readTable(table),
                   $$CategoryProgressTableReferences(db, table, e),
                 ),
               )
@@ -7668,15 +7683,19 @@ class $$CategoryProgressTableTableManager
                     >
                   >(state) {
                     if (categoryId) {
-                      state = state.withJoin(
-                        currentTable: table,
-                        currentColumn: table.categoryId,
-                        referencedTable: $$CategoryProgressTableReferences
-                            ._categoryIdTable(db),
-                        referencedColumn: $$CategoryProgressTableReferences
-                            ._categoryIdTable(db)
-                            .id,
-                      ) as T;
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.categoryId,
+                                referencedTable:
+                                    $$CategoryProgressTableReferences
+                                        ._categoryIdTable(db),
+                                referencedColumn:
+                                    $$CategoryProgressTableReferences
+                                        ._categoryIdTable(db)
+                                        .id,
+                              )
+                              as T;
                     }
 
                     return state;
@@ -7704,40 +7723,42 @@ typedef $$CategoryProgressTableProcessedTableManager =
       CategoryProgressData,
       PrefetchHooks Function({bool categoryId})
     >;
-typedef $$MockExamsTableCreateCompanionBuilder = MockExamsCompanion Function({
-  Value<int> id,
-  required DateTime startedAt,
-  Value<DateTime?> completedAt,
-  required DateTime deadline,
-  Value<int?> durationSeconds,
-  required int totalQuestions,
-  Value<int?> correctAnswers,
-  Value<double?> percentage,
-  required String result,
-  required String questionIdsJson,
-  Value<String> answersJson,
-  Value<String> flagsJson,
-  Value<String> optionOrderJson,
-  Value<int> currentIndex,
-  Value<String?> categoryBreakdownJson,
-});
-typedef $$MockExamsTableUpdateCompanionBuilder = MockExamsCompanion Function({
-  Value<int> id,
-  Value<DateTime> startedAt,
-  Value<DateTime?> completedAt,
-  Value<DateTime> deadline,
-  Value<int?> durationSeconds,
-  Value<int> totalQuestions,
-  Value<int?> correctAnswers,
-  Value<double?> percentage,
-  Value<String> result,
-  Value<String> questionIdsJson,
-  Value<String> answersJson,
-  Value<String> flagsJson,
-  Value<String> optionOrderJson,
-  Value<int> currentIndex,
-  Value<String?> categoryBreakdownJson,
-});
+typedef $$MockExamsTableCreateCompanionBuilder =
+    MockExamsCompanion Function({
+      Value<int> id,
+      required DateTime startedAt,
+      Value<DateTime?> completedAt,
+      required DateTime deadline,
+      Value<int?> durationSeconds,
+      required int totalQuestions,
+      Value<int?> correctAnswers,
+      Value<double?> percentage,
+      required String result,
+      required String questionIdsJson,
+      Value<String> answersJson,
+      Value<String> flagsJson,
+      Value<String> optionOrderJson,
+      Value<int> currentIndex,
+      Value<String?> categoryBreakdownJson,
+    });
+typedef $$MockExamsTableUpdateCompanionBuilder =
+    MockExamsCompanion Function({
+      Value<int> id,
+      Value<DateTime> startedAt,
+      Value<DateTime?> completedAt,
+      Value<DateTime> deadline,
+      Value<int?> durationSeconds,
+      Value<int> totalQuestions,
+      Value<int?> correctAnswers,
+      Value<double?> percentage,
+      Value<String> result,
+      Value<String> questionIdsJson,
+      Value<String> answersJson,
+      Value<String> flagsJson,
+      Value<String> optionOrderJson,
+      Value<int> currentIndex,
+      Value<String?> categoryBreakdownJson,
+    });
 
 class $$MockExamsTableFilterComposer
     extends Composer<_$AppDatabase, $MockExamsTable> {
@@ -8079,16 +8100,7 @@ class $$MockExamsTableTableManager
                 categoryBreakdownJson: categoryBreakdownJson,
               ),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable<$MockExamsTable, MockExam>(table),
-                  BaseReferences<_$AppDatabase, $MockExamsTable, MockExam>(
-                    db,
-                    table,
-                    e,
-                  ),
-                ),
-              )
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: null,
         ),
@@ -8109,16 +8121,18 @@ typedef $$MockExamsTableProcessedTableManager =
       MockExam,
       PrefetchHooks Function()
     >;
-typedef $$BookmarksTableCreateCompanionBuilder = BookmarksCompanion Function({
-  Value<int> id,
-  required String questionId,
-  required DateTime createdAt,
-});
-typedef $$BookmarksTableUpdateCompanionBuilder = BookmarksCompanion Function({
-  Value<int> id,
-  Value<String> questionId,
-  Value<DateTime> createdAt,
-});
+typedef $$BookmarksTableCreateCompanionBuilder =
+    BookmarksCompanion Function({
+      Value<int> id,
+      required String questionId,
+      required DateTime createdAt,
+    });
+typedef $$BookmarksTableUpdateCompanionBuilder =
+    BookmarksCompanion Function({
+      Value<int> id,
+      Value<String> questionId,
+      Value<DateTime> createdAt,
+    });
 
 final class $$BookmarksTableReferences
     extends BaseReferences<_$AppDatabase, $BookmarksTable, Bookmark> {
@@ -8316,7 +8330,7 @@ class $$BookmarksTableTableManager
           withReferenceMapper: (p0) => p0
               .map(
                 (e) => (
-                  e.readTable<$BookmarksTable, Bookmark>(table),
+                  e.readTable(table),
                   $$BookmarksTableReferences(db, table, e),
                 ),
               )
@@ -8342,15 +8356,17 @@ class $$BookmarksTableTableManager
                     >
                   >(state) {
                     if (questionId) {
-                      state = state.withJoin(
-                        currentTable: table,
-                        currentColumn: table.questionId,
-                        referencedTable: $$BookmarksTableReferences
-                            ._questionIdTable(db),
-                        referencedColumn: $$BookmarksTableReferences
-                            ._questionIdTable(db)
-                            .id,
-                      ) as T;
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.questionId,
+                                referencedTable: $$BookmarksTableReferences
+                                    ._questionIdTable(db),
+                                referencedColumn: $$BookmarksTableReferences
+                                    ._questionIdTable(db)
+                                    .id,
+                              )
+                              as T;
                     }
 
                     return state;
@@ -8673,7 +8689,7 @@ class $$WeakConceptsTableTableManager
           withReferenceMapper: (p0) => p0
               .map(
                 (e) => (
-                  e.readTable<$WeakConceptsTable, WeakConcept>(table),
+                  e.readTable(table),
                   $$WeakConceptsTableReferences(db, table, e),
                 ),
               )
@@ -8699,15 +8715,17 @@ class $$WeakConceptsTableTableManager
                     >
                   >(state) {
                     if (categoryId) {
-                      state = state.withJoin(
-                        currentTable: table,
-                        currentColumn: table.categoryId,
-                        referencedTable: $$WeakConceptsTableReferences
-                            ._categoryIdTable(db),
-                        referencedColumn: $$WeakConceptsTableReferences
-                            ._categoryIdTable(db)
-                            .id,
-                      ) as T;
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.categoryId,
+                                referencedTable: $$WeakConceptsTableReferences
+                                    ._categoryIdTable(db),
+                                referencedColumn: $$WeakConceptsTableReferences
+                                    ._categoryIdTable(db)
+                                    .id,
+                              )
+                              as T;
                     }
 
                     return state;
@@ -8735,16 +8753,18 @@ typedef $$WeakConceptsTableProcessedTableManager =
       WeakConcept,
       PrefetchHooks Function({bool categoryId})
     >;
-typedef $$AppMetaTableCreateCompanionBuilder = AppMetaCompanion Function({
-  required String key,
-  required String value,
-  Value<int> rowid,
-});
-typedef $$AppMetaTableUpdateCompanionBuilder = AppMetaCompanion Function({
-  Value<String> key,
-  Value<String> value,
-  Value<int> rowid,
-});
+typedef $$AppMetaTableCreateCompanionBuilder =
+    AppMetaCompanion Function({
+      required String key,
+      required String value,
+      Value<int> rowid,
+    });
+typedef $$AppMetaTableUpdateCompanionBuilder =
+    AppMetaCompanion Function({
+      Value<String> key,
+      Value<String> value,
+      Value<int> rowid,
+    });
 
 class $$AppMetaTableFilterComposer
     extends Composer<_$AppDatabase, $AppMetaTable> {
@@ -8831,27 +8851,21 @@ class $$AppMetaTableTableManager
               $$AppMetaTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$AppMetaTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> key = const Value.absent(),
-            Value<String> value = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) => AppMetaCompanion(key: key, value: value, rowid: rowid),
-          createCompanionCallback: ({
-            required String key,
-            required String value,
-            Value<int> rowid = const Value.absent(),
-          }) => AppMetaCompanion.insert(key: key, value: value, rowid: rowid),
+          updateCompanionCallback:
+              ({
+                Value<String> key = const Value.absent(),
+                Value<String> value = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => AppMetaCompanion(key: key, value: value, rowid: rowid),
+          createCompanionCallback:
+              ({
+                required String key,
+                required String value,
+                Value<int> rowid = const Value.absent(),
+              }) =>
+                  AppMetaCompanion.insert(key: key, value: value, rowid: rowid),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable<$AppMetaTable, AppMetaData>(table),
-                  BaseReferences<_$AppDatabase, $AppMetaTable, AppMetaData>(
-                    db,
-                    table,
-                    e,
-                  ),
-                ),
-              )
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: null,
         ),

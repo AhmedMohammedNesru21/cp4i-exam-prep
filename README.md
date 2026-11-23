@@ -82,7 +82,11 @@ dev: `drift_dev`, `build_runner`. Deliberately **not** used:
 * `flutter_secure_storage` and `connectivity_plus`: the app stores no secrets and has no sync feature yet.
   Add them when cloud backup or sync is implemented.
 
-Built with Flutter 3.50 (Material via `package:material_ui`).
+**Flutter version:** requires Dart 3.8 or newer. Tested on Flutter 3.41.9 (Dart 3.11.5), which is the
+reference toolchain and the one `pubspec.lock` is resolved with, and on Flutter 3.50. The app imports
+`package:flutter/material.dart`; Flutter 3.47 and later mark that import as deprecated in favour of
+`package:material_ui`, so `flutter analyze` on those versions shows info-level notices only. Switch the imports
+when you move your toolchain to 3.47 or later.
 
 ## Build and run
 

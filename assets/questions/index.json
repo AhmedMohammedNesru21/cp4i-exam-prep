@@ -1,0 +1,19 @@
+{
+ "bankVersion": 1,
+ "files": [
+  "01_overview_a.json",
+  "02_overview_b.json",
+  "03_platform.json",
+  "04_products_a.json",
+  "05_products_b.json",
+  "06_storage.json",
+  "07_scaling_a.json",
+  "08_scaling_b.json",
+  "09_security.json",
+  "10_observability.json",
+  "11_overview_c.json",
+  "12_platform_b.json",
+  "13_products_c.json",
+  "14_scaling_c.json"
+ ]
+}

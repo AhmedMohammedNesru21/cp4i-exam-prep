@@ -51,7 +51,7 @@ for path in sorted(glob.glob(os.path.join(ROOT, '[0-9]*.json'))):
         for name, val in (('sub', sub), ('comp', comp), ('q', q), ('exp', exp), ('scenario', scen), ('tip', tip)):
             if not str(val).strip():
                 errors.append(f"{where}: empty {name}")
-        if len(exp) < 80:
+        if len(exp) < 100:
             warnings.append(f"{where}: short explanation")
         rows.append(dict(cat=doc['category'], kd=kd, q=q, sub=sub, multi=isinstance(ans, list), where=where))
 

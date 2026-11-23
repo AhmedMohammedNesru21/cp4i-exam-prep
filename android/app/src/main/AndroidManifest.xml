@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="cp4i_exam_prep"
+        android:label="CP4I Prep"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
